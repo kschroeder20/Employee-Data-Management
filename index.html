@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <title>Train Scheduler</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.3/firebase.js"></script>
+    </head>
+
+    <body>
+        <!-- Current Train Schedule Table -->
+        <div class='row'>
+            <table id="trainSchedule" class="striped">
+                <thead>
+                    <tr>
+                        <th>Train Name</th>
+                        <th>Destination</th>
+                        <th>Frequency (min)</th>
+                        <th>Next Arrival</th>
+                        <th>Minutes Away</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Train information dynamically entered here    -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Submission Form -->
+        <div class="row">
+            <form class="col s12">
+                <div class='row'>
+                    <div class="input-field col s6">
+                        <input placeholder='Train Name' type='text' id='trainName' class="validate" />
+                        <label class='active' for='trainName'>Train Name</label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="input-field col s6">
+                        <input placeholder='Destination' type='text' id='destination' class="validate" />
+                        <label class='active' for='destination'>Destination</label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="input-field col s6">
+                        <input placeholder='First Train Time(HH:mm)' type='time' id='firstTrain' class="validate" />
+                        <label class='active' for='firstTrain'>First Train Time(HH:mm)</label>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class="input-field col s6">
+                        <input placeholder='Frequency' type='number' min='1' max='60' id='frequencyMins'
+                            class="validate" />
+                        <label class='active' for='frequencyMins'>Frequency (min)</label>
+                    </div>
+                </div>
+                <button id='saveButton'>Submit</button>
+                <script src="assets/javascript/moment.js"></script>
+                <script src="assets/javascript/app.js"></script>
+            </form>
+        </div>
+    </body>
+
+</html>
