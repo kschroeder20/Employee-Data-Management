@@ -1,11 +1,11 @@
 // Initialize Firebase
 var config = {
-    apiKey: "AIzaSyDfnDvYeXayH-RrGcNSIzsFHX-CajLlkqQ",
-    authDomain: "gtcbc-trainscheduler.firebaseapp.com",
-    databaseURL: "https://gtcbc-trainscheduler.firebaseio.com",
-    projectId: "gtcbc-trainscheduler",
-    storageBucket: "",
-    messagingSenderId: "225133807135"
+    apiKey: "AIzaSyDS7R6dR-f2mHdtf683BHdC3DNxtMKfsy4",
+    authDomain: "employeedatamgmt-eadbb.firebaseapp.com",
+    databaseURL: "https://employeedatamgmt-eadbb.firebaseio.com",
+    projectId: "employeedatamgmt-eadbb",
+    storageBucket: "employeedatamgmt-eadbb.appspot.com",
+    messagingSenderId: "307997365380"
   };
   firebase.initializeApp(config);
   
@@ -27,9 +27,9 @@ var config = {
   
     // Get user input from form and store in variables
     employeeName = $("#employeeName").val().trim();
-    destination = $("#role").val().trim();
-    firstTrain = $("#startDate").val().trim();
-    trainFrequency = $("#monthsWorked").val().trim();
+    role= $("#role").val().trim();
+    startDate = $("#startDate").val().trim();
+    monthlyRate = $("#monthlyRate").val();
   
  
   
@@ -41,7 +41,7 @@ var config = {
       monthlyRate: monthlyRate
     };
   
-    // Push trainInfo to database
+    // Push employeeInfo to database
     database.ref().push(employeeInfo);
   
     // Clean input fields
@@ -54,13 +54,12 @@ var config = {
     $("#employeeName").val("");
     $("#role").val("");
     $("#startDate").val("");
-    $("#monthsWorked").val("");
     $("#monthlyRate").val("");
-    $("#totalBilled").val("");
+    
   };
   
   database.ref().on("value", function(snapshot) {
-    console.log(snapshot.val());
+    
   
     // Store into variables.
     employeeName = snapshot.val().employeeName;
@@ -108,4 +107,5 @@ var config = {
   
        //Append newRow to the table
        $("#current-employees > tbody").append(newRow);
+       console.log(newRow);
   });
