@@ -13,13 +13,13 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 // Variables
-var trainName = "";
-var trainDestination = "";
-var firstTrain = "";
-var trainFrequency = "";
-var nextTrain = null;
-var firstConvertedTime = null;
-var minutesNextTrain = null;
+var employeeName = "";
+var role = "";
+var startDate = "";
+var monthsWorked = null;
+var monthlyRate = null;
+var totalBilled = null;
+
 
 // Form onlcick function
 $("#saveButton").on("click", function () {
@@ -27,7 +27,7 @@ $("#saveButton").on("click", function () {
   event.preventDefault();
 
   // Get user input from form and store in variables
-  trainName = $("#trainName").val().trim();
+  employeeName = $("#trainName").val().trim();
   destination = $("#destination").val().trim();
   firstTrain = $("#firstTrain").val().trim();
   trainFrequency = $("#frequencyMins").val().trim();

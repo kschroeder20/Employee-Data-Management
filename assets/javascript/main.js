@@ -1,0 +1,111 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDfnDvYeXayH-RrGcNSIzsFHX-CajLlkqQ",
+    authDomain: "gtcbc-trainscheduler.firebaseapp.com",
+    databaseURL: "https://gtcbc-trainscheduler.firebaseio.com",
+    projectId: "gtcbc-trainscheduler",
+    storageBucket: "",
+    messagingSenderId: "225133807135"
+  };
+  firebase.initializeApp(config);
+  
+  var database = firebase.database();
+  
+  // Variables
+  var employeeName = "";
+  var role = "";
+  var startDate = "";
+  var monthsWorked = null;
+  var monthlyRate = null;
+  var totalBilled = null;
+  
+  
+  // Form onlcick function
+  $("#saveButton").on("click", function () {
+    //prevent default behavior
+    event.preventDefault();
+  
+    // Get user input from form and store in variables
+    employeeName = $("#employeeName").val().trim();
+    destination = $("#role").val().trim();
+    firstTrain = $("#startDate").val().trim();
+    trainFrequency = $("#monthsWorked").val().trim();
+  
+ 
+  
+    // Creates variables to connect to firebase
+    var employeeInfo = {
+      employeeName: employeeName,
+      role: role,
+      startDate: startDate,
+      monthlyRate: monthlyRate
+    };
+  
+    // Push trainInfo to database
+    database.ref().push(employeeInfo);
+  
+    // Clean input fields
+    clearInputFields()
+  
+  });
+  
+  // Function to clear submission fields
+  function clearInputFields() {
+    $("#employeeName").val("");
+    $("#role").val("");
+    $("#startDate").val("");
+    $("#monthsWorked").val("");
+    $("#monthlyRate").val("");
+    $("#totalBilled").val("");
+  };
+  
+  database.ref().on("value", function(snapshot) {
+    console.log(snapshot.val());
+  
+    // Store into variables.
+    employeeName = snapshot.val().employeeName;
+    role = snapshot.val().role;
+    startdate= snapshot.val().startDate;
+    monthlyRate = snapshot.val().monthlyRate;
+   
+  
+    // Employee Info
+   
+  
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    // monthsWorkedCalc = moment(firstTrain, "HH:mm").subtract(1, "years");
+    // console.log("FIRST CONVERTED TIME: " + firstConvertedTime);
+  
+    // // Current Time
+    // var currentTime = moment();
+    // console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+  
+    // // Difference between the times
+    // var diffTime = moment().diff(moment(firstConvertedTime), "minutes");
+    // console.log("DIFFERENCE IN TIME: " + diffTime);
+  
+    // // Time apart
+    // var timeApart = diffTime % trainFrequency;
+    // console.log("TIME APART: " + timeApart);
+  
+    // // Minute until time arrival
+    // minutesNextTrain = trainFrequency - timeApart;
+    // console.log("MINUTES TILL TRAIN: " + minutesNextTrain);
+  
+    // // Next Train
+    // nextTrain = moment().add(minutesNextTrain, "minutes");
+    // console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+  
+     // Creating new row
+     var newRow = $("<tr>").append(
+      $("<td>").text(employeeName),
+      $("<td>").text(role),
+      $("<td>").text(startDate),
+      $("<td>").text(monthsWorked),
+      $("<td>").text(monthlyRate),
+      $("<td>").text(totalBilled)
+       );
+  
+       //Append newRow to the table
+       $("#current-employees > tbody").append(newRow);
+  });
